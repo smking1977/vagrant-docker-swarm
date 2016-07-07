@@ -2,6 +2,13 @@
 # vi: set ft=ruby :
 
 CAERUS_SOURCE_CODE_PATH = "/Users/stevek/projects/caerus/caerus-football/"
+$script = <<-SCRIPT
+      sudo groupadd docker
+      sudo usermod -a -G docker vagrant
+      sudo yum update -y
+      sudo yum install -y wget git
+      curl -fsSL https://test.docker.com/ | sh
+    SCRIPT
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -26,18 +33,9 @@ Vagrant.configure(2) do |config|
     
 
     ###  config docker 
-    master.vm.provision "shell", inline: <<-SHELL
-      sudo groupadd docker
-      sudo usermod -a -G docker vagrant
-      sudo yum update -y
-      sudo yum install -y wget git
-      curl -fsSL https://test.docker.com/ | sh
+    master.vm.provision "shell", inline: $script
 
-    SHELL
 
-    #master.vm.provision "docker" do |d|
-    #  d.pull_images  "docker:1.12.0-rc3"
-    #end
   end
 
 
@@ -57,15 +55,8 @@ Vagrant.configure(2) do |config|
      end
     
 
-    ###  config docker 
-    worker1.vm.provision "shell", inline: <<-SHELL
-      sudo groupadd docker
-      sudo usermod -a -G docker vagrant
-    SHELL
-
-    worker1.vm.provision "docker" do |d|
-      d.pull_images  "docker:1.12.0-rc3"
-    end
+   ###  config docker 
+    master.vm.provision "shell", inline: $script
   end
 
   #
@@ -85,14 +76,7 @@ Vagrant.configure(2) do |config|
     
 
     ###  config docker 
-    worker2.vm.provision "shell", inline: <<-SHELL
-      sudo groupadd docker
-      sudo usermod -a -G docker vagrant
-    SHELL
-
-    worker2.vm.provision "docker" do |d|
-      d.pull_images  "docker:1.12.0-rc3"
-    end
+    master.vm.provision "shell", inline: $script
   end
 
 
