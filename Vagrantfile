@@ -56,7 +56,7 @@ Vagrant.configure(2) do |config|
     
 
    ###  config docker 
-    master.vm.provision "shell", inline: $script
+    worker1.vm.provision "shell", inline: $script
   end
 
   #
@@ -76,7 +76,7 @@ Vagrant.configure(2) do |config|
     
 
     ###  config docker 
-    master.vm.provision "shell", inline: $script
+    worker2.vm.provision "shell", inline: $script
   end
 
 
