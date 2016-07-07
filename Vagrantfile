@@ -29,11 +29,15 @@ Vagrant.configure(2) do |config|
     master.vm.provision "shell", inline: <<-SHELL
       sudo groupadd docker
       sudo usermod -a -G docker vagrant
+      sudo yum update -y
+      sudo yum install -y wget git
+      curl -fsSL https://test.docker.com/ | sh
+
     SHELL
 
-    master.vm.provision "docker" do |d|
-      d.pull_images  "docker:1.12.0-rc3"
-    end
+    #master.vm.provision "docker" do |d|
+    #  d.pull_images  "docker:1.12.0-rc3"
+    #end
   end
 
 
