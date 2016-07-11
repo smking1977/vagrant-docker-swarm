@@ -5,9 +5,9 @@ CAERUS_SOURCE_CODE_PATH = "/Users/stevek/projects/caerus/caerus-football/"
 $script = <<-SCRIPT
       sudo groupadd docker
       sudo usermod -a -G docker vagrant
-      sudo yum update -y
       sudo yum install -y wget git
       curl -fsSL https://test.docker.com/ | sh
+      sudo service docker start
     SCRIPT
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
