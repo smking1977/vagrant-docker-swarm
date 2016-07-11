@@ -6,6 +6,8 @@ $script = <<-SCRIPT
       sudo groupadd docker
       sudo usermod -a -G docker vagrant
       sudo yum install -y wget git
+      sudo su - 
+      echo $1 > /etc/hostname
       curl -fsSL https://test.docker.com/ | sh
       sudo service docker start
     SCRIPT
@@ -33,7 +35,7 @@ Vagrant.configure(2) do |config|
     
 
     ###  config docker 
-    master.vm.provision "shell", inline: $script
+    master.vm.provision "shell", inline: $script, args: ["master"]
 
 
   end
@@ -56,7 +58,7 @@ Vagrant.configure(2) do |config|
     
 
    ###  config docker 
-    worker1.vm.provision "shell", inline: $script
+    worker1.vm.provision "shell", inline: $script, args: ["worker1"]
   end
 
   #
@@ -76,7 +78,7 @@ Vagrant.configure(2) do |config|
     
 
     ###  config docker 
-    worker2.vm.provision "shell", inline: $script
+    worker2.vm.provision "shell", inline: $script, args: ["worker2"]
   end
 
 
