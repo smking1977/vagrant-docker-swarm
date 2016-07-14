@@ -1,7 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-CAERUS_SOURCE_CODE_PATH = "/Users/stevek/projects/caerus/caerus-football/"
 $script = <<-SCRIPT
       sudo groupadd docker
       sudo usermod -a -G docker vagrant
